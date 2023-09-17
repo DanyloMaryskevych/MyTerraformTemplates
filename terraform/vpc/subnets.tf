@@ -1,5 +1,9 @@
+module "aws_availability_zones" {
+  source = "./module/data_sources/aws_availability_zones"
+}
+
 locals {
-  cidr_blocks = {
+  subnets = {
     Private-1a : {
       cidr_block : "10.0.0.0/20"
       availability_zone_name : module.aws_availability_zones.aws_availability_zone_names[0]
@@ -34,8 +38,8 @@ locals {
 }
 
 module "subnet" {
-  source   = "./module/subnet"
-  for_each = local.cidr_blocks
+  source   = "./module/aws_subnet"
+  for_each = local.subnets
 
   vpc_id = module.vpc.vpc_id
 

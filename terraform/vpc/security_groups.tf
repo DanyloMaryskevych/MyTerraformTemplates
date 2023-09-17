@@ -1,5 +1,5 @@
 module "external_sg" {
-  source = "./module/security_group"
+  source = "./module/aws_security_group"
 
   vpc_id      = module.vpc.vpc_id
   name        = "Web-Access-SG"
@@ -7,23 +7,23 @@ module "external_sg" {
 
   ingress_rules = [
     {
-      from_port = 22
-      to_port   = 22
-      cidr_blocks = var.cidr_blocks
+      from_port   = 22
+      to_port     = 22
+      cidr_blocks = [var.cidr_blocks]
     }
   ]
 
   egress_rules = [
     {
-      from_port = 0
-      to_port   = 0
-      cidr_blocks = var.cidr_blocks
+      from_port   = 0
+      to_port     = 0
+      cidr_blocks = [var.cidr_blocks]
     }
   ]
 }
 
 module "internal_sg" {
-  source = "./module/security_group"
+  source = "./module/aws_security_group"
 
   vpc_id      = module.vpc.vpc_id
   name        = "Internal-Access-SG"
@@ -31,17 +31,17 @@ module "internal_sg" {
 
   ingress_rules = [
     {
-      from_port        = 22
-      to_port          = 22
-      security_groups  = [module.external_sg.sg_ig]
+      from_port       = 22
+      to_port         = 22
+      security_groups = [module.external_sg.sg_ig]
     }
   ]
 
   egress_rules = [
     {
-      from_port = 0
-      to_port   = 0
-      cidr_blocks = var.cidr_blocks
+      from_port   = 0
+      to_port     = 0
+      cidr_blocks = [var.cidr_blocks]
     }
   ]
 }

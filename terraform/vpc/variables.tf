@@ -7,8 +7,8 @@ variable "secret_key" {
 }
 
 variable "cidr_blocks" {
-  type = list(string)
-  default = ["0.0.0.0/0"]
+  type = string
+  default = "0.0.0.0/0"
 }
 
 variable "ipv6_cidr_blocks" {

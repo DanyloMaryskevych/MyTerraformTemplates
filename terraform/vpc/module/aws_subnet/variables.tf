@@ -17,3 +17,11 @@ variable "availability_zone" {
 variable "map_public_ip_on_launch" {
   type = bool
 }
+
+variable "private_name_prefix" {
+  default = "Private"
+}
+
+variable "public_name_prefix" {
+  default = "Public"
+}
