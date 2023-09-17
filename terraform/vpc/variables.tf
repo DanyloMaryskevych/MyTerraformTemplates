@@ -15,3 +15,8 @@ variable "ipv6_cidr_blocks" {
   type = list(string)
   default = ["::/0"]
 }
+
+variable "key_name" {
+  type = string
+  default = "AWS-DEV-02"
+}

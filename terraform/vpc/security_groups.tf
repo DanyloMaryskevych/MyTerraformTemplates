@@ -1,4 +1,4 @@
-module "external_sg" {
+module "web_access_sg" {
   source = "./module/aws_security_group"
 
   vpc_id      = module.vpc.vpc_id
@@ -9,6 +9,11 @@ module "external_sg" {
     {
       from_port   = 22
       to_port     = 22
+      cidr_blocks = [var.cidr_blocks]
+    },
+    {
+      from_port   = 80
+      to_port     = 80
       cidr_blocks = [var.cidr_blocks]
     }
   ]
@@ -33,7 +38,7 @@ module "internal_sg" {
     {
       from_port       = 22
       to_port         = 22
-      security_groups = [module.external_sg.sg_ig]
+      security_groups = [module.web_access_sg.sg_id]
     }
   ]
 

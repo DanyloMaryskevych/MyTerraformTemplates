@@ -1,6 +1,3 @@
-variable "ipv6_cidr_blocks" {
-  default = ""
-}
 resource "aws_security_group" "aws_security_group" {
   name        = var.name
   description = var.description
